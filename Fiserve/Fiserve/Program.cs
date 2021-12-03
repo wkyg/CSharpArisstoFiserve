@@ -21,7 +21,7 @@ namespace Fiserve
             string apiSecret = "Kqhlqrca1ADeO0fvxiGcMGoMh31Tmw2wGpukLHwN7UZ";
 
             MerchantCredentials credentials = new MerchantCredentials(apiKey, apiSecret);
-            Gateway gateway = Gateway.Create(credentials, true);
+            Gateway gateway = Gateway.Create(credentials);
 
             // For use in production, supply true as the optional production argument:
             // Gateway gateway = Gateway.create(credentials, true);
@@ -70,7 +70,7 @@ namespace Fiserve
             string tokenizePayload = @"{
                 ""requestType"": ""PaymentCardPaymentTokenizationRequest"", 
                 ""storeId"": ""4945018794"",
-                ""paymentCard"": {
+                ""paymentCard"": {  
                     ""number"": ""5256511000568382"",
                     ""expiryDate"": {
                         ""month"": ""03"",
@@ -99,6 +99,8 @@ namespace Fiserve
             {
                 Console.WriteLine(exp.Message);
             }
+
+            
         }
     }
 }
