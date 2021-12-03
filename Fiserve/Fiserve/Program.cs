@@ -29,7 +29,7 @@ namespace Fiserve
             // string productionURL = "https://prod.api.firstdata.com/gateway/v2";
             // Gateway gateway = Gateway.create(credentials, productionURL);
 
-            /*
+            
             string json_payload = @"{
                 ""domain"": """",
                 ""token"": """",
@@ -59,13 +59,15 @@ namespace Fiserve
                 Console.WriteLine(algorithm);
                 Console.WriteLine(clientRequestId);
 
-                //Console.WriteLine(response.ToJson());
+                Console.WriteLine(response.ToJson());
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            */
+            
+
+            /*
 
             string tokenizePayload = @"{
                 ""requestType"": ""PaymentCardPaymentTokenizationRequest"", 
@@ -99,6 +101,7 @@ namespace Fiserve
             {
                 Console.WriteLine(exp.Message);
             }
+            */
 
             
         }

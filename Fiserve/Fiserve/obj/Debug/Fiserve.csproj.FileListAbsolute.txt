@@ -54,3 +54,4 @@ D:\YONG\TestC#\CSharpArisstoFiserve\Fiserve\Fiserve\obj\Debug\Fiserve.csproj.Cor
 D:\YONG\TestC#\CSharpArisstoFiserve\Fiserve\Fiserve\obj\Debug\Fiserve.csproj.CopyComplete
 D:\YONG\TestC#\CSharpArisstoFiserve\Fiserve\Fiserve\obj\Debug\Fiserve.exe
 D:\YONG\TestC#\CSharpArisstoFiserve\Fiserve\Fiserve\obj\Debug\Fiserve.pdb
+D:\YONG\TestC#\CSharpArisstoFiserve\Fiserve\Fiserve\obj\Debug\Fiserve.Form1.resources
