@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Model;
 using Org.Simple;
 
@@ -20,8 +21,8 @@ namespace Fiserve
             string apiKey = "UhVgbPN3tWWhB6fz9n2ulvwPu7iaXika";
             string apiSecret = "Kqhlqrca1ADeO0fvxiGcMGoMh31Tmw2wGpukLHwN7UZ";
 
-            MerchantCredentials credentials = new MerchantCredentials(apiKey, apiSecret);
-            Gateway gateway = Gateway.Create(credentials);
+            MerchantCredentials credentials = new MerchantCredentials(apiKey, apiSecret);            
+            Gateway gateway = Gateway.Create(credentials, true);
 
             // For use in production, supply true as the optional production argument:
             // Gateway gateway = Gateway.create(credentials, true);
@@ -68,10 +69,10 @@ namespace Fiserve
             */
 
             string tokenizePayload = @"{
-                ""requestType"": ""PaymentCardPaymentTokenizationRequest"", 
+                ""requestType"": ""PaymentCardPaymentTokenizationRequest"",         
                 ""storeId"": ""4945018794"",
                 ""paymentCard"": {  
-                    ""number"": ""5256511000568382"",
+                    ""number"": ""5256511000568382"",                    
                     ""expiryDate"": {
                         ""month"": ""03"",
                         ""year"": ""25""
@@ -80,27 +81,24 @@ namespace Fiserve
                 ""createToken"": {
                     ""reusable"": true,
                     ""declineDeplicates"": false
-                },
-                ""accountVerification"": false,                
+                },                
+                ""accountVerification"": false                
             }";
 
             PaymentCardPaymentTokenizationRequest tokenize = JsonConvert.DeserializeObject<PaymentCardPaymentTokenizationRequest>(tokenizePayload);
 
             try
             {
-                PaymentTokenizationResponse resp = gateway.CreatePaymentToken(tokenize);
+                PaymentTokenizationResponse resp = gateway.CreatePaymentToken(tokenize);//, "Secure3D10AuthenticationRequest", "Malaysia");
 
                 string tokenResult = resp.ToJson();
 
                 Console.WriteLine(tokenResult);
-
             }
             catch (Exception exp)
             {
                 Console.WriteLine(exp.Message);
-            }
-
-            
+            }            
         }
     }
 }
