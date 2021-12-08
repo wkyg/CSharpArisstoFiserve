@@ -68,6 +68,7 @@ namespace Fiserve
             }
             */
 
+            /*
             string tokenizePayload = @"{
                 ""requestType"": ""PaymentCardPaymentTokenizationRequest"",         
                 ""storeId"": ""4945018794"",
@@ -98,7 +99,49 @@ namespace Fiserve
             catch (Exception exp)
             {
                 Console.WriteLine(exp.Message);
-            }            
+            }           
+            */
+
+            string json_payload = @"{
+                ""storeId"": ""4945018794"",
+                ""requestType"": ""PaymentCardPreAuthTransaction"",                
+                ""transactionAmount"": {
+                    ""total"": ""1"",
+                    ""currency"": ""MYR""
+                },
+                ""paymentMethod"": {
+                    ""paymentCard"": {
+                        ""number"": ""5256511000568382"",
+                        ""securityCode"": ""123"",                       
+                        ""expiryDate"": {
+                            ""month"": ""03"",
+                            ""year"": ""25""
+                        }
+                    }
+                },
+                ""createToken"": {
+                    ""reusable"": true,
+                    ""declineDuplicates"": false
+                },
+                ""authenticationRequest"": {
+                    ""authenticationType"": ""Secure3D10AuthenticationRequest""
+                }
+            }";
+
+            PaymentCardPreAuthTransaction pay = JsonConvert.DeserializeObject<PaymentCardPreAuthTransaction>(json_payload);
+
+            try
+            {
+                TransactionResponse resp = gateway.SubmitPrimaryTransaction(pay);//, "Secure3D10AuthenticationRequest", "Malaysia");
+
+                string tokenResult = resp.ToJson();
+
+                Console.WriteLine(tokenResult);
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
         }
     }
 }
