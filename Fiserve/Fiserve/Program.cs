@@ -106,7 +106,7 @@ namespace Fiserve
                 ""storeId"": ""4945018794"",
                 ""requestType"": ""PaymentCardPreAuthTransaction"",                
                 ""transactionAmount"": {
-                    ""total"": ""1"",
+                    ""total"": ""10"",
                     ""currency"": ""MYR""
                 },
                 ""paymentMethod"": {
