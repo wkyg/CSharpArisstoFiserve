@@ -44,6 +44,8 @@ namespace Fiserve
                 AccessTokenResponse response = gateway.RequestAccessToken(payload);                
                 string result = response.ToJson();
 
+                Console.WriteLine(result);
+
                 tokenId = JObject.Parse(result)["tokenId"].ToString();
                 string status = JObject.Parse(result)["status"].ToString();
                 string issuedOn = JObject.Parse(result)["issuedOn"].ToString();
@@ -101,7 +103,8 @@ namespace Fiserve
                 Console.WriteLine(exp.Message);
             }           
             */
-
+                 
+            
             string json_payload = @"{
                 ""storeId"": ""4945018794"",
                 ""requestType"": ""PaymentCardPreAuthTransaction"",                
@@ -112,7 +115,7 @@ namespace Fiserve
                 ""paymentMethod"": {
                     ""paymentCard"": {
                         ""number"": ""5256511000568382"",
-                        ""securityCode"": ""123"",                       
+                        ""securityCode"": ""977"",                       
                         ""expiryDate"": {
                             ""month"": ""03"",
                             ""year"": ""25""
@@ -129,10 +132,12 @@ namespace Fiserve
             }";
 
             PaymentCardPreAuthTransaction pay = JsonConvert.DeserializeObject<PaymentCardPreAuthTransaction>(json_payload);
-
+            
             try
             {
-                TransactionResponse resp = gateway.SubmitPrimaryTransaction(pay);//, "Secure3D10AuthenticationRequest", "Malaysia");
+                TransactionResponse resp;
+
+                resp = gateway.SubmitPrimaryTransaction(pay);
 
                 string tokenResult = resp.ToJson();
 
@@ -142,6 +147,31 @@ namespace Fiserve
             {
                 Console.WriteLine(exp.Message);
             }
+            
+
+            /*
+            string json_payload = @"{
+                ""authenticationType"": ""Secure3D10AuthenticationUpdateRequest"",
+                ""securityCode"": ""977"",                
+                ""payerAuthenticationResponse"": ""eJxVUm1PwjAQ/isLnzRm9HXAyNmEiYkmahD84NfSHW6J66AdRv+9LQPBJm3vubs+vT49eKsc4nyFZu9QwTN6rz8wqcvbwWL5ukwpZZkQm1EquFinUtJJuhZoUqQ6y82opOuxHihYzJa4U/CFztetVWxIhxzICQZaZyptOwXa7IrHF5XJXAgJ5AihQfc4VzQORkdhkfk4EPRusLpBNXO1912bXD3rT/3ja32drEqbFBWQQxxMu7ed+1EymwA5Adi7T1V13dZPCdE9xdC0DZAYAHKubLGPlg9E33Wp3u3GFW05uStunuiyuNcLeW+rFS/86y2QmAGl7lBxyhnjbJxQPuVyGq8++EE3sQLFKA2v7G3YxitmF4FLB4QfcGjN6QEnBPi9bS2GjCDInw0lehPqP27n4u8eosimC7qNeC7DzEQuOMvoOMp9CETKOojDJes5IwASj5LjT5JjJwTrX4f8AgV6tEE=""
+            }";
+
+            AuthenticationUpdateRequest pay = JsonConvert.DeserializeObject<AuthenticationUpdateRequest>(json_payload);
+
+            try
+            {
+                TransactionResponse resp = gateway.FinalizeSecureTransaction("72859672958", pay);//, "Secure3D10AuthenticationRequest", "Malaysia");
+
+                string tokenResult = resp.ToJson();
+
+                Console.WriteLine(tokenResult);
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
+            */
+
         }
     }
 }
